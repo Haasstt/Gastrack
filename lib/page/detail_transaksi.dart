@@ -652,7 +652,7 @@ class _MyStatefulWidgetState extends State<DetailTransaksi> {
                 clipBehavior: Clip.none,
                 children: [
                   Image.network(
-                    ' ${(_baseProvider.UrlImage)}/${(DataDetailTransaksi[0]['bukti_pembayaran'])}',
+                    '${(_baseProvider.UrlImage)}/${(DataDetailTransaksi[0]['bukti_pembayaran'])}',
                     fit: BoxFit.contain,
                   ),
                   const Positioned(
