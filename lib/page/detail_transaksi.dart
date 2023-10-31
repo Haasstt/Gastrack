@@ -651,18 +651,16 @@ class _MyStatefulWidgetState extends State<DetailTransaksi> {
               child: Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  Image.network(
-                    '${(_baseProvider.UrlImage)}/${(DataDetailTransaksi[0]['bukti_pembayaran'])}',
-                    fit: BoxFit.contain,
-                  ),
-                  const Positioned(
-                    left: 0,
-                    right: 0,
-                    bottom: -50,
-                    child: Icon(
-                      Icons.close_rounded,
-                      color: Color.fromARGB(184, 255, 255, 255),
-                      size: 30,
+                  Container(
+                    margin: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 50,
+                    ),
+                    color: Colors.black,
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: Image.network(
+                      '${(_baseProvider.UrlImage)}/${(DataDetailTransaksi[0]['bukti_pembayaran'])}',
+                      fit: BoxFit.contain,
                     ),
                   ),
                 ],
