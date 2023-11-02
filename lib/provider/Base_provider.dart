@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:sp_util/sp_util.dart';
 
 class BaseProvider extends GetConnect {
-  var host = "192.168.1.26:8000";
+  var host = "192.168.1.3:8000";
   var Url = "";
   var Urltransaksiuser = "";
   var Urlupdatedatauser = "";
