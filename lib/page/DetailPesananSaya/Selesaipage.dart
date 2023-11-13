@@ -156,7 +156,7 @@ class _MyHomePageState extends State<Belumbayarpage> {
                                           ),
                                         ),
                                         Text(
-                                          "Pesanan Sedang Diproses",
+                                          "Pesanan Sudah Diterima",
                                           style: const TextStyle(
                                             fontSize: 12,
                                             fontFamily: 'Poppins',

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gastrack/animations/fadeAnimation.dart';
 import 'package:gastrack/page/DetailPesananSaya/Belumbayarpage.dart';
 import 'package:gastrack/page/detail_transaksi.dart';
-import 'package:gastrack/page/notfoundpage.dart';
+import 'package:gastrack/page/lacakPage.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:gastrack/provider/TransaksiProvider.dart';
 import 'package:sp_util/sp_util.dart';
@@ -187,8 +187,9 @@ class _MyHomePageState extends State<Belumbayarpage> {
                                                     Navigator.push(
                                                       context,
                                                       PageTransition(
-                                                        child:
-                                                            const NotFoundPage(),
+                                                        child: LacakPage(
+                                                          id: index['id_transaksi'],
+                                                        ),
                                                         type: PageTransitionType
                                                             .rightToLeft,
                                                       ),

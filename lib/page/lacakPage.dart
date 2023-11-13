@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages, non_constant_identifier_names
+// ignore_for_file: depend_on_referenced_packages, non_constant_identifier_names, file_names
 
 import 'package:flutter/material.dart';
 import 'package:gastrack/provider/TransaksiProvider.dart';
@@ -17,16 +17,19 @@ class LacakPage extends StatefulWidget {
 class _MyStatefulWidgetState extends State<LacakPage> {
   List<Map<String, dynamic>> DataLokasi = [];
   late var id = widget.id.toInt();
+  // bool _notResponding = false;
+  // var message = "";
 
   @override
   void initState() {
     TransaksiProvider().getDatalokasi(id).then((value) {
       if (value.statusCode == 200) {
-        print(value.body);
-        // var data = value.body['data'];
-        // setState(() {
-        //   DataLokasi.add(data);
-        // });
+        var data = value.body['data'];
+        for (var element in data) {
+          setState(() {
+            DataLokasi.add(element);
+          });
+        }
       }
     });
     super.initState();
@@ -35,40 +38,110 @@ class _MyStatefulWidgetState extends State<LacakPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Detail Produk',
-          style: TextStyle(
-            color: Colors.white,
-            fontFamily: 'Poppins',
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 1,
-        iconTheme: const IconThemeData(
-          color: Colors.white,
-        ),
-        flexibleSpace: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [
-                Color.fromRGBO(249, 1, 131, 1.0),
-                Color.fromRGBO(128, 38, 198, 1.0)
-              ],
-            ),
-          ),
-        ),
-      ),
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(id.toString()),
+            Container(
+              margin: const EdgeInsets.only(top: 50, left: 20, right: 20),
+              height: 70,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color.fromARGB(255, 122, 122, 122)
+                        .withOpacity(0.15), // Warna bayangan
+                    spreadRadius: 0,
+                    blurRadius: 2,
+                    offset: const Offset(0, 1),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    height: 40,
+                    width: 40,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(71, 109, 109, 109)
+                          .withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                      ),
+                    ),
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Lacak lokasi Kurir',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal,
+                          fontSize: 16,
+                          fontFamily: 'Poppins',
+                          color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 50,
+                  ),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: const BorderRadius.all(Radius.circular(10)),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(255, 122, 122, 122)
+                          .withOpacity(0.15), // Warna bayangan
+                      spreadRadius: 0,
+                      blurRadius: 2,
+                      offset: const Offset(0, 1),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  children: DataLokasi.map((index) {
+                    return Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        
+                        Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Image.asset(
+                            "assets/icon/icon_trip.png",
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            '${(index['keterangan'])} [${(index['waktu'])}]',
+                            style: const TextStyle(
+                                fontWeight: FontWeight.normal,
+                                fontSize: 16,
+                                fontFamily: 'Poppins',
+                                color: Colors.black54),
+                          ),
+                        ),
+                      ],
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
           ],
         ),
       ),

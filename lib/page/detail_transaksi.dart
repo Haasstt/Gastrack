@@ -46,7 +46,6 @@ class _MyStatefulWidgetState extends State<DetailTransaksi> {
         setState(() {
           DataDetailTransaksi.add(data);
         });
-        // print(data);
       }
     });
     super.initState();
