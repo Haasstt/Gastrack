@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:gastrack/animations/fadeAnimation.dart';
 import 'package:gastrack/page/DetailPesananSaya/Belumbayarpage.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:gastrack/page/detail_transaksi.dart';
 import 'package:gastrack/provider/TransaksiProvider.dart';
 import 'package:sp_util/sp_util.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Page4 extends StatelessWidget {
   const Page4({Key? key}) : super(key: key);
@@ -80,111 +82,125 @@ class _MyHomePageState extends State<Belumbayarpage> {
               children: DataPesanan.map((index) {
                 return Column(
                   children: [
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          FadeAnimation(
-                            0.9,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 10,
-                                      horizontal: 10,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageTransition(
+                            child: DetailTransaksi(
+                              id: index['id_transaksi'],
+                            ),
+                            type: PageTransitionType.rightToLeft,
+                          ),
+                        );
+                      },
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            FadeAnimation(
+                              0.9,
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: Container(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                        horizontal: 10,
+                                      ),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/icon/selesai_icon.png',
+                                          ),
+                                        ],
+                                      ),
                                     ),
+                                  ),
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
+                                    width: 250,
                                     child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: [
-                                        Image.asset(
-                                          'assets/icon/selesai_icon.png',
+                                        Text(
+                                          "${index['nama_agen']}",
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          "${index['jumlah_transaksi']} Pcs ${index['nama_gas']}",
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Kategori: ${index['jenis_gas']}",
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                        Text(
+                                          "Pesanan Sedang Diproses",
+                                          style: const TextStyle(
+                                            fontSize: 12,
+                                            fontFamily: 'Poppins',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(
+                                          children: [
+                                            Text(
+                                              "${index['tanggal_transaksi']}",
+                                              style: const TextStyle(
+                                                fontSize: 12,
+                                                fontFamily: 'Poppins',
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                            FadeAnimation(
+                                              0.6,
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10),
+                                                child: Text(
+                                                  "Rp${index['total_transaksi']}",
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontFamily: 'Poppins',
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Color.fromRGBO(
+                                                        249, 1, 131, 1.0),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
                                   ),
-                                ),
-                                Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  width: 250,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        "${index['nama']}",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${index['Jumlah']} Pcs ${index['produk']}",
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      Text(
-                                        "Kategori: ${index['kategori']}",
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.normal,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${index['status']}",
-                                        style: const TextStyle(
-                                          fontSize: 12,
-                                          fontFamily: 'Poppins',
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Text(
-                                            "${index['tanggal']}",
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              fontFamily: 'Poppins',
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
-                                          FadeAnimation(
-                                            0.6,
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 10),
-                                              child: Text(
-                                                "Rp${index['total']}",
-                                                style: const TextStyle(
-                                                  fontSize: 14,
-                                                  fontFamily: 'Poppins',
-                                                  fontWeight: FontWeight.bold,
-                                                  color: Color.fromRGBO(
-                                                      249, 1, 131, 1.0),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                     const Divider(), // Garis pemisah antara setiap entri
