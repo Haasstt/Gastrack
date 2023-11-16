@@ -357,25 +357,6 @@ class _MyHomePageState extends State<Home> {
                                     type: PageTransitionType.rightToLeft,
                                   ),
                                 );
-
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     child: DetailProduk(
-                                //       id: 0,
-                                //     ),
-                                //     type: PageTransitionType.rightToLeft,
-                                //   ),
-                                // );
-                                // Navigator.push(
-                                //   context,
-                                //   PageTransition(
-                                //     child: const DetailTransaksi(
-                                //       id: 1,
-                                //     ),
-                                //     type: PageTransitionType.rightToLeft,
-                                //   ),
-                                // );
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,

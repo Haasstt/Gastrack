@@ -11,7 +11,7 @@ class NotFoundPage extends StatelessWidget {
         elevation: 0,
         iconTheme: const IconThemeData(
           color: Colors.black,
-        ),
+        ), 
       ),
       body: Container(
         decoration: const BoxDecoration(
