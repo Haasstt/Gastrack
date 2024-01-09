@@ -59,6 +59,15 @@ class TransaksiController extends GetxController {
               );
               Get.toNamed('/pesanansaya');
             }
+            
+            else if (value.statusCode == 422) {
+              Get.snackbar(
+                "Gagal",
+                value.body['message'],
+                backgroundColor: Colors.red.withOpacity(0.85),
+                colorText: Colors.white,
+              );
+            }
           });
         }
       } else if (value.hasError == true) {
